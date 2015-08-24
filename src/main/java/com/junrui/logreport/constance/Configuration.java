@@ -13,6 +13,12 @@ public class Configuration {
 	public static String HTTPFS_OPEN_PARAM="";
 	public static String HDFSUPLOADPATH="";
 	
+	public static String MYSQLURL="";
+	public static String MYSQLUSERNAME="";
+	public static String MYSQLPASSWORD="";
+	
+	public static String ENGINE="";
+	
 	static
 	{
 		try {
@@ -27,6 +33,12 @@ public class Configuration {
 			HTTPFS_CREATE_PARAM=p.getProperty("httpfs.create.param");
 			HTTPFS_OPEN_PARAM=p.getProperty("httpfs.open.param");
 			HDFSUPLOADPATH=p.getProperty("hdfs.upload.path");
+			
+			MYSQLURL=p.getProperty("mysql.url");
+			MYSQLUSERNAME=p.getProperty("mysql.username");
+			MYSQLPASSWORD=p.getProperty("mysql.password");
+			
+			ENGINE=p.getProperty("engine");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

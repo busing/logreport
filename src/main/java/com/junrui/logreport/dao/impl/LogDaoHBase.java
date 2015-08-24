@@ -1,4 +1,4 @@
-package com.junrui.logreport.dao;
+package com.junrui.logreport.dao.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,17 +13,28 @@ import com.junrui.logreport.bean.UserActionLog;
 import com.junrui.logreport.constance.ActionTypeConstance;
 import com.junrui.logreport.constance.ColFamConstance;
 import com.junrui.logreport.constance.TableConstance;
-import com.junrui.logreport.hbase.HBaseDaoImpl;
-import com.junrui.logreport.hbase.IHBaseDao;
+import com.junrui.logreport.dao.ILogDao;
+import com.junrui.logreport.dbutil.hbase.HBaseDaoImpl;
+import com.junrui.logreport.dbutil.hbase.IHBaseDao;
 import com.junrui.logreport.util.DateUtil;
 import com.junrui.logreport.util.StringUtil;
 
-public class LogDao
+public class LogDaoHBase implements ILogDao
 {
-	public static final Logger log=Logger.getLogger(LogDao.class);
+	public static final Logger log=Logger.getLogger(LogDaoHBase.class);
 	
 	private IHBaseDao hbaseDao=new HBaseDaoImpl();
 	
+	/** (非 Javadoc) 
+	* <p>Title: saveDownload</p> 
+	* <p>Description: </p> 
+	* @param clientOS
+	* @param clientType
+	* @param channelId
+	* @param clientVersion
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#saveDownload(java.lang.String, java.lang.String, java.lang.String, java.lang.String) 
+	*/ 
 	public boolean saveDownload( String clientOS,String clientType,String channelId,String clientVersion)
 	{
 		try {
@@ -43,6 +54,14 @@ public class LogDao
 	}
 	
 	
+	/** (非 Javadoc) 
+	* <p>Title: saveUserAction</p> 
+	* <p>Description: </p> 
+	* @param headMessage
+	* @param userActionLog
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#saveUserAction(com.junrui.logreport.bean.CommonHeadMessage, com.junrui.logreport.bean.UserActionLog) 
+	*/ 
 	public boolean saveUserAction(CommonHeadMessage headMessage, UserActionLog userActionLog)
 	{
 		try {
@@ -86,6 +105,14 @@ public class LogDao
 		}
 	}
 	
+	/** (非 Javadoc) 
+	* <p>Title: saveUserLogin</p> 
+	* <p>Description: </p> 
+	* @param headMessage
+	* @param lastLoginTime
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#saveUserLogin(com.junrui.logreport.bean.CommonHeadMessage, long) 
+	*/ 
 	public boolean saveUserLogin(CommonHeadMessage headMessage, long lastLoginTime)
 	{
 		try {
@@ -127,6 +154,12 @@ public class LogDao
 		}
 	}
 	
+	/** (非 Javadoc) 
+	* <p>Title: savePageBrowseFile</p> 
+	* <p>Description: </p> 
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#savePageBrowseFile() 
+	*/ 
 	public boolean savePageBrowseFile()
 	{
 		return true;

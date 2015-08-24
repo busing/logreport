@@ -1,4 +1,4 @@
-package com.junrui.logreport.hbase;
+package com.junrui.logreport.dbutil.hbase;
 
 import java.util.Map;
 

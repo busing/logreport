@@ -1,39 +1,56 @@
-package com.junrui.logreport.api;
+package com.junrui.logreport.api.impl;
 
+import com.junrui.logreport.api.LogApi;
 import com.junrui.logreport.bean.CommonHeadMessage;
 import com.junrui.logreport.bean.UserActionLog;
 import com.junrui.logreport.bean.UserStatus;
 import com.junrui.logreport.constance.Configuration;
-import com.junrui.logreport.dao.LogDao;
+import com.junrui.logreport.dao.ILogDao;
+import com.junrui.logreport.dao.impl.LogDaoHBase;
+import com.junrui.logreport.dao.impl.LogDaoMySql;
 import com.junrui.logreport.util.DateUtil;
 import com.junrui.logreport.util.HttpFSUtil;
 
 public class LogApiImpl implements LogApi {
 	
-	private LogDao logDao=new LogDao();
+	private ILogDao logDao=null;
+	
+	public LogApiImpl() {
+		if(Configuration.ENGINE.toLowerCase().equals("hbase"))
+		{
+			logDao =new LogDaoHBase(); 
+		}
+		else
+		{
+			logDao =new LogDaoMySql(); 
+		}
+	}
 
-	/** 
-	* @Title: recodeDownload 
-	* @Description: TODO(记录下载记录数据) 
-	* @param clientOS 客户端系统（1：ios 2：android）
-	* @param clientType 客户端类型（1：大众版 2：医生版本）
-	* @param channelId 渠道id
-	* @param clientVersion 客户端版本号
-	* @return boolean    返回类型 boolean
-	* @throws 
-	*/ 
+	
+	
+
+	/** (非 Javadoc) 
+	* <p>Title: recodeDownload</p> 
+	* <p>Description: </p> 
+	* @param clientOS
+	* @param clientType
+	* @param channelId
+	* @param clientVersion
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#recodeDownload(java.lang.String, java.lang.String, java.lang.String, java.lang.String) 
+	*/  
 	public boolean recodeDownload(String clientOS, String clientType, String channelId, String clientVersion) {
 		return logDao.saveDownload(clientOS, clientType, channelId, clientVersion);
 	}
 
-	/** 
-	* @Title: recodeUserAction 
-	* @Description: TODO(Description) 
-	* @param headMessage 头部消息封装的对象
-	* @param userActionLog 用户行为日志对象
-	* @return boolean    返回类型 boolean
-	* @throws 
-	*/ 
+	/** (非 Javadoc) 
+	* <p>Title: recodeUserAction</p> 
+	* <p>Description: </p> 
+	* @param headMessage
+	* @param userActionLog
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#recodeUserAction(com.junrui.logreport.bean.CommonHeadMessage, com.junrui.logreport.bean.UserActionLog) 
+	*/  
 	public boolean recodeUserAction(CommonHeadMessage headMessage, UserActionLog userActionLog) {
 		return logDao.saveUserAction(headMessage, userActionLog);
 	}
@@ -54,13 +71,13 @@ public class LogApiImpl implements LogApi {
 		return true;
 	}
 
-	/** 
-	* @Title: recodeUserStatus 
-	* @Description: TODO(记录用户状态改变日志) 
-	* @param userStatus 
-	* @return boolean    返回类型 boolean
-	* @throws 
-	*/ 
+	/** (非 Javadoc) 
+	* <p>Title: recodeUserStatus</p> 
+	* <p>Description: </p> 
+	* @param userStatus
+	* @return 
+	* @see com.junrui.logreport.dao.ILogDao#recodeUserStatus(com.junrui.logreport.bean.UserStatus) 
+	*/  
 	public boolean recodeUserStatus(UserStatus userStatus) {
 		return false;
 	}

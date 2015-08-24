@@ -1,7 +1,7 @@
 package com.junrui.logreport;
 
 import com.junrui.logreport.api.LogApi;
-import com.junrui.logreport.api.LogApiImpl;
+import com.junrui.logreport.api.impl.LogApiImpl;
 import com.junrui.logreport.bean.CommonHeadMessage;
 import com.junrui.logreport.bean.UserActionLog;
 import com.junrui.logreport.constance.ActionTypeConstance;
@@ -77,11 +77,11 @@ public class LogApiTest  extends TestCase{
 	* @return void    返回类型 
 	* @throws 
 	*/ 
-	public void testRecodePageBrowseFile()
-	{
-		LogApi logApi=new LogApiImpl();
-		logApi.recodePageBrowseFile("D:\\hbase-0.98.13\\README.txt", "haha.txt");
-	}
+//	public void testRecodePageBrowseFile()
+//	{
+//		LogApi logApi=new LogApiImpl();
+//		logApi.recodePageBrowseFile("D:\\hbase-0.98.13\\README.txt", "haha.txt");
+//	}
 	
 	
 }
