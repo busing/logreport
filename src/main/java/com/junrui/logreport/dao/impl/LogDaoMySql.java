@@ -26,6 +26,7 @@ public class LogDaoMySql  implements ILogDao
 			String sql="insert into t_download_log (client_os,client_version,client_type,download_time,channel_id) values (?,?,?,?,?)";
 			Connection conn=MySqlHandler.getConnection();
 			int i=qr.update(conn, sql,clientOS,clientVersion,clientType,DateUtil.getCurrentLongTime()+"",channelId);
+			DbUtils.close(conn);
 			return i>0?true:false;
 		} catch (SQLException e) {
 			log.error("记录下载记录异常",e);
