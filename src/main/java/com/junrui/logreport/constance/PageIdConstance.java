@@ -2,7 +2,7 @@ package com.junrui.logreport.constance;
 
 /** 
 * @ClassName: PageIdConstance 
-* @Description: TODO(Description) 
+* @Description: 页面常量定义
 * @author ytai
 * @date 2015年8月20日 下午2:48:55 
 */ 

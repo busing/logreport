@@ -63,10 +63,19 @@ public class CommonHeadMessage {
 	*/ 
 	private String channelId;
 	
+	/** 
+	* @Fields wxOpenId : TODO(微信openId) 
+	*/ 
 	private String wxOpenId;
 	
+	/** 
+	* @Fields qqOpenId : TODO(QQOpenId) 
+	*/ 
 	private String qqOpenId;
 	
+	/** 
+	* @Fields wbOpenId : TODO(微博openId) 
+	*/ 
 	private String wbOpenId;
 
 	public String getUserId() {

@@ -38,8 +38,8 @@ public interface LogApi
 	/** 
 	* @Title: recodePageBrowseFile 
 	* @Description: 上传页面浏览日志文件 
-	* @param filePath
-	* @param fileName
+	* @param filePath 客户端上报的日志的完整路劲（包括文件名）
+	* @param fileName 上传到hdfs的文件名称
 	* @return
 	* @return boolean    返回类型 
 	* @throws 
