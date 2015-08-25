@@ -36,6 +36,11 @@ public class UserActionLog
 	private String requestSuccess;
 	
 	/** 
+	* @Fields statusCode : TODO(服务处理的状态码) 
+	*/ 
+	private String statusCode;
+	
+	/** 
 	* @Fields userId : TODO(业务数据id) 
 	*/ 
 	private String dataId;
@@ -44,6 +49,27 @@ public class UserActionLog
 	* @Fields userId : TODO(时间（天：20150820）) 
 	*/ 
 	private String  dayTime;
+	
+	
+	
+
+	public UserActionLog() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public UserActionLog(long requestTime, long responseTime, long serverCostTime, String actionType,
+			String requestSuccess, String statusCode, String dataId, String dayTime) {
+		super();
+		this.requestTime = requestTime;
+		this.responseTime = responseTime;
+		this.serverCostTime = serverCostTime;
+		this.actionType = actionType;
+		this.requestSuccess = requestSuccess;
+		this.statusCode = statusCode;
+		this.dataId = dataId;
+		this.dayTime = dayTime;
+	}
 
 	public long getRequestTime() {
 		return requestTime;
@@ -100,5 +126,15 @@ public class UserActionLog
 	public void setServerCostTime(long serverCostTime) {
 		this.serverCostTime = serverCostTime;
 	}
+
+	public String getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
+	}
+	
+	
 	
 }

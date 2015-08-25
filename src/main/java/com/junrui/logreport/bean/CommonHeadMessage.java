@@ -8,6 +8,12 @@ package com.junrui.logreport.bean;
 *  
 */ 
 public class CommonHeadMessage {
+	
+	/** 
+	* @Fields userAgent : 用户手机ua信息
+	*/ 
+	public String userAgent;
+	
 	/** 
 	* @Fields userId : TODO(用户id) 
 	*/ 
@@ -27,6 +33,11 @@ public class CommonHeadMessage {
 	* @Fields userId : TODO(手机imei) 
 	*/ 
 	private String imei;
+	
+	/** 
+	* @Fields imsi : TODO(手机imsi) 
+	*/ 
+	private String imsi;
 	
 	/** 
 	* @Fields userId : TODO(设备系统（1：ios 2：android）) 
@@ -189,15 +200,40 @@ public class CommonHeadMessage {
 	public void setWbOpenId(String wbOpenId) {
 		this.wbOpenId = wbOpenId;
 	}
+	
+	
 
-	public CommonHeadMessage(String userId, String phoneNum, String userType, String imei, String deviceOS,
-			String deviceVersion, String clientOS, String clientVersion, String clientType, String sessIonId,
-			String channelId, String wxOpenId, String qqOpenId, String wbOpenId) {
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+
+	public String getImsi() {
+		return imsi;
+	}
+
+	public void setImsi(String imsi) {
+		this.imsi = imsi;
+	}
+
+	public CommonHeadMessage()
+	{
+	}
+
+	public CommonHeadMessage(String userAgent, String userId, String phoneNum, String userType, String imei,
+			String imsi, String deviceOS, String deviceVersion, String clientOS, String clientVersion,
+			String clientType, String sessIonId, String channelId, String wxOpenId, String qqOpenId, String wbOpenId) {
 		super();
+		this.userAgent = userAgent;
 		this.userId = userId;
 		this.phoneNum = phoneNum;
 		this.userType = userType;
 		this.imei = imei;
+		this.imsi = imsi;
 		this.deviceOS = deviceOS;
 		this.deviceVersion = deviceVersion;
 		this.clientOS = clientOS;
@@ -209,12 +245,9 @@ public class CommonHeadMessage {
 		this.qqOpenId = qqOpenId;
 		this.wbOpenId = wbOpenId;
 	}
-
-	public CommonHeadMessage()
-	{
-	}
 	
 
+	
 	
 	
 }

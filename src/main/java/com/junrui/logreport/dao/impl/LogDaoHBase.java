@@ -39,13 +39,13 @@ public class LogDaoHBase implements ILogDao
 	{
 		try {
 			Map<String, String> data=new HashMap<String, String>();
-			data.put(ColFamConstance.DownloadLog.ClientOS,clientOS);
-			data.put(ColFamConstance.DownloadLog.ClientVersion,clientVersion);
-			data.put(ColFamConstance.DownloadLog.ClientType,clientType);
-			data.put(ColFamConstance.DownloadLog.DownloadTime,DateUtil.getCurrentLongTime()+"");
-			data.put(ColFamConstance.DownloadLog.ClientOS,clientOS);
-			data.put(ColFamConstance.DownloadLog.ChannelID,channelId);
-			String rowKey=channelId+data.get(ColFamConstance.DownloadLog.DownloadTime);
+			data.put(ColFamConstance.DownloadLog.CLIENT_OS,clientOS);
+			data.put(ColFamConstance.DownloadLog.CLIENT_VERSION,clientVersion);
+			data.put(ColFamConstance.DownloadLog.CLIENT_TYPE,clientType);
+			data.put(ColFamConstance.DownloadLog.DOWNLOAD_TIME,DateUtil.getCurrentLongTime()+"");
+			data.put(ColFamConstance.DownloadLog.CLIENT_OS,clientOS);
+			data.put(ColFamConstance.DownloadLog.CHANNEL_ID,channelId);
+			String rowKey=channelId+data.get(ColFamConstance.DownloadLog.DOWNLOAD_TIME);
 			return hbaseDao.save(TableConstance.DOWNLOAD_LOG, ColFamConstance.LOG, rowKey,data);
 		} catch (Exception e) {
 			log.error("记录下载日志异常",e);
@@ -67,30 +67,33 @@ public class LogDaoHBase implements ILogDao
 		try {
 			Map<String, String> data=new HashMap<String, String>();
 			
-			data.put(ColFamConstance.CommonColName.ChannelID, headMessage.getChannelId());
-			data.put(ColFamConstance.CommonColName.ClientOS, headMessage.getClientOS());
-			data.put(ColFamConstance.CommonColName.ClientType, headMessage.getClientType());
-			data.put(ColFamConstance.CommonColName.ClientVersion, headMessage.getClientVersion());
-			data.put(ColFamConstance.CommonColName.DeviceOS, headMessage.getDeviceOS());
-			data.put(ColFamConstance.CommonColName.DeviceOSVersion, headMessage.getDeviceVersion());
-			data.put(ColFamConstance.CommonColName.Imei, headMessage.getImei());
-			data.put(ColFamConstance.CommonColName.PhoneNum, headMessage.getPhoneNum());
-			data.put(ColFamConstance.CommonColName.SessionId, headMessage.getSessIonId());
-			data.put(ColFamConstance.CommonColName.UserId, headMessage.getUserId());
-			data.put(ColFamConstance.CommonColName.UserType, headMessage.getUserType());
+			data.put(ColFamConstance.CommonColName.CHANNEL_ID, headMessage.getChannelId());
+			data.put(ColFamConstance.CommonColName.USER_AGENT, headMessage.getUserAgent());
+			data.put(ColFamConstance.CommonColName.CLIENT_OS, headMessage.getClientOS());
+			data.put(ColFamConstance.CommonColName.CLIENT_TYPE, headMessage.getClientType());
+			data.put(ColFamConstance.CommonColName.CLIENT_VERSION, headMessage.getClientVersion());
+			data.put(ColFamConstance.CommonColName.DEVICE_OS, headMessage.getDeviceOS());
+			data.put(ColFamConstance.CommonColName.DEVICE_OS_VERSION, headMessage.getDeviceVersion());
+			data.put(ColFamConstance.CommonColName.IMEI, headMessage.getImei());
+			data.put(ColFamConstance.CommonColName.IMSI, headMessage.getImsi());
+			data.put(ColFamConstance.CommonColName.PHONE_NUM, headMessage.getPhoneNum());
+			data.put(ColFamConstance.CommonColName.SESSION_ID, headMessage.getSessIonId());
+			data.put(ColFamConstance.CommonColName.USER_ID, headMessage.getUserId());
+			data.put(ColFamConstance.CommonColName.USER_TYPE, headMessage.getUserType());
 			
-			data.put(ColFamConstance.ActionLog.ActionType, userActionLog.getActionType());
-			data.put(ColFamConstance.ActionLog.DataId, userActionLog.getDataId());
-			data.put(ColFamConstance.ActionLog.DayTime, userActionLog.getDayTime());
-			data.put(ColFamConstance.ActionLog.RequestSuccess, userActionLog.getRequestSuccess());
-			data.put(ColFamConstance.ActionLog.RequestTime, userActionLog.getRequestTime()+"");
-			data.put(ColFamConstance.ActionLog.ResponseTime, userActionLog.getResponseTime()+"");
+			data.put(ColFamConstance.ActionLog.ACTION_TYPE, userActionLog.getActionType());
+			data.put(ColFamConstance.ActionLog.DATA_ID, userActionLog.getDataId());
+			data.put(ColFamConstance.ActionLog.DAY_TIME, userActionLog.getDayTime());
+			data.put(ColFamConstance.ActionLog.REQUEST_SUCCESS, userActionLog.getRequestSuccess());
+			data.put(ColFamConstance.ActionLog.STATUS_CODE, userActionLog.getStatusCode());
+			data.put(ColFamConstance.ActionLog.REQUEST_TIME, userActionLog.getRequestTime()+"");
+			data.put(ColFamConstance.ActionLog.RESPONSE_TIME, userActionLog.getResponseTime()+"");
 			
 			if(userActionLog.getRequestTime()!=0  &&userActionLog.getResponseTime()!=0 && userActionLog.getServerCostTime()==0)
 			{
 				userActionLog.setServerCostTime(userActionLog.getResponseTime()-userActionLog.getRequestTime());
 			}
-			data.put(ColFamConstance.ActionLog.ServeCostTime, userActionLog.getServerCostTime()+"");
+			data.put(ColFamConstance.ActionLog.SERVER_COSTTIME, userActionLog.getServerCostTime()+"");
 
 			String rowKey=userActionLog.getActionType()+headMessage.getChannelId()+(userActionLog.getRequestTime()==0?DateUtil.getCurrentLongTime():(userActionLog.getRequestTime()+""));
 			
@@ -117,7 +120,7 @@ public class LogDaoHBase implements ILogDao
 	{
 		try {
 			Result r=hbaseDao.getOneRecord(TableConstance.LOGIN_RECORD, headMessage.getUserId());
-			Cell cell= r.getColumnLatestCell(Bytes.toBytes(ColFamConstance.LOG), Bytes.toBytes(ColFamConstance.LoginRecord.LoginTimes));
+			Cell cell= r.getColumnLatestCell(Bytes.toBytes(ColFamConstance.LOG), Bytes.toBytes(ColFamConstance.LoginRecord.LOGIN_TIMES));
 			int loginCount=1;
 			if(cell!=null)
 			{
@@ -132,21 +135,22 @@ public class LogDaoHBase implements ILogDao
 			}
 			
 			Map<String, String> data=new HashMap<String, String>();
-			data.put(ColFamConstance.CommonColName.UserId, headMessage.getUserId());
-			data.put(ColFamConstance.CommonColName.ChannelID, headMessage.getChannelId());
-			data.put(ColFamConstance.CommonColName.ClientOS, headMessage.getClientOS());
-			data.put(ColFamConstance.CommonColName.ClientType, headMessage.getClientType());
-			data.put(ColFamConstance.CommonColName.ClientVersion, headMessage.getClientVersion());
-			data.put(ColFamConstance.CommonColName.DeviceOS, headMessage.getDeviceOS());
-			data.put(ColFamConstance.CommonColName.DeviceOSVersion, headMessage.getDeviceVersion());
-			data.put(ColFamConstance.CommonColName.Imei, headMessage.getImei());
-			data.put(ColFamConstance.CommonColName.PhoneNum, headMessage.getPhoneNum());
-			data.put(ColFamConstance.CommonColName.UserType, headMessage.getUserType());
-			data.put(ColFamConstance.CommonColName.QQOpenId,headMessage.getQqOpenId());
-			data.put(ColFamConstance.CommonColName.WBOpenId, headMessage.getWbOpenId());
-			data.put(ColFamConstance.CommonColName.WXOpenId,headMessage.getWxOpenId());
-			data.put(ColFamConstance.LoginRecord.lastLoginTime, lastLoginTime+"");
-			data.put(ColFamConstance.LoginRecord.LoginTimes, loginCount+"");
+			data.put(ColFamConstance.CommonColName.USER_AGENT, headMessage.getUserAgent());
+			data.put(ColFamConstance.CommonColName.USER_ID, headMessage.getUserId());
+			data.put(ColFamConstance.CommonColName.CHANNEL_ID, headMessage.getChannelId());
+			data.put(ColFamConstance.CommonColName.CLIENT_OS, headMessage.getClientOS());
+			data.put(ColFamConstance.CommonColName.CLIENT_TYPE, headMessage.getClientType());
+			data.put(ColFamConstance.CommonColName.CLIENT_VERSION, headMessage.getClientVersion());
+			data.put(ColFamConstance.CommonColName.DEVICE_OS, headMessage.getDeviceOS());
+			data.put(ColFamConstance.CommonColName.DEVICE_OS_VERSION, headMessage.getDeviceVersion());
+			data.put(ColFamConstance.CommonColName.IMSI, headMessage.getImei());
+			data.put(ColFamConstance.CommonColName.PHONE_NUM, headMessage.getPhoneNum());
+			data.put(ColFamConstance.CommonColName.USER_TYPE, headMessage.getUserType());
+			data.put(ColFamConstance.CommonColName.QQ_OPENID,headMessage.getQqOpenId());
+			data.put(ColFamConstance.CommonColName.WB_OPENID, headMessage.getWbOpenId());
+			data.put(ColFamConstance.CommonColName.WX_OPENID,headMessage.getWxOpenId());
+			data.put(ColFamConstance.LoginRecord.LAST_LOGIN_TIME, lastLoginTime+"");
+			data.put(ColFamConstance.LoginRecord.LOGIN_TIMES, loginCount+"");
 			return hbaseDao.save(TableConstance.LOGIN_RECORD, ColFamConstance.LOG, headMessage.getUserId(), data);
 		} catch (Exception e) {
 			log.error("记录用户登陆日志",e);
