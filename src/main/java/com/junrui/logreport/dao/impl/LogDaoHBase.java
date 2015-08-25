@@ -69,17 +69,17 @@ public class LogDaoHBase implements ILogDao
 			
 			data.put(ColFamConstance.CommonColName.CHANNEL_ID, headMessage.getChannelId());
 			data.put(ColFamConstance.CommonColName.USER_AGENT, headMessage.getUserAgent());
-			data.put(ColFamConstance.CommonColName.CLIENT_OS, headMessage.getClientOS());
-			data.put(ColFamConstance.CommonColName.CLIENT_TYPE, headMessage.getClientType());
+			data.put(ColFamConstance.CommonColName.CLIENT_OS, headMessage.getClientOS()+"");
+			data.put(ColFamConstance.CommonColName.CLIENT_TYPE, headMessage.getClientType()+"");
 			data.put(ColFamConstance.CommonColName.CLIENT_VERSION, headMessage.getClientVersion());
-			data.put(ColFamConstance.CommonColName.DEVICE_OS, headMessage.getDeviceOS());
-			data.put(ColFamConstance.CommonColName.DEVICE_OS_VERSION, headMessage.getDeviceVersion());
+			data.put(ColFamConstance.CommonColName.DEVICE_OS, headMessage.getDeviceOS()+"");
+			data.put(ColFamConstance.CommonColName.DEVICE_OS_VERSION, headMessage.getDeviceVersion()+"");
 			data.put(ColFamConstance.CommonColName.IMEI, headMessage.getImei());
 			data.put(ColFamConstance.CommonColName.IMSI, headMessage.getImsi());
 			data.put(ColFamConstance.CommonColName.PHONE_NUM, headMessage.getPhoneNum());
 			data.put(ColFamConstance.CommonColName.SESSION_ID, headMessage.getSessIonId());
 			data.put(ColFamConstance.CommonColName.USER_ID, headMessage.getUserId());
-			data.put(ColFamConstance.CommonColName.USER_TYPE, headMessage.getUserType());
+			data.put(ColFamConstance.CommonColName.USER_TYPE, headMessage.getUserType()+"");
 			
 			data.put(ColFamConstance.ActionLog.ACTION_TYPE, userActionLog.getActionType());
 			data.put(ColFamConstance.ActionLog.DATA_ID, userActionLog.getDataId());
@@ -138,7 +138,7 @@ public class LogDaoHBase implements ILogDao
 			data.put(ColFamConstance.CommonColName.USER_AGENT, headMessage.getUserAgent());
 			data.put(ColFamConstance.CommonColName.USER_ID, headMessage.getUserId());
 			data.put(ColFamConstance.CommonColName.CHANNEL_ID, headMessage.getChannelId());
-			data.put(ColFamConstance.CommonColName.CLIENT_OS, headMessage.getClientOS());
+			data.put(ColFamConstance.CommonColName.CLIENT_OS, headMessage.getClientOS()+"");
 			data.put(ColFamConstance.CommonColName.CLIENT_TYPE, headMessage.getClientType());
 			data.put(ColFamConstance.CommonColName.CLIENT_VERSION, headMessage.getClientVersion());
 			data.put(ColFamConstance.CommonColName.DEVICE_OS, headMessage.getDeviceOS());

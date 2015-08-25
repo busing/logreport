@@ -64,8 +64,6 @@ public class ColFamConstance {
 		public static final String STATUS_CODE="status_code";
 		public static final String DATA_ID="data_id";
 		public static final String DAY_TIME="day_time";
-		
-		
 	}
 	
 	

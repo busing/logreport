@@ -49,7 +49,7 @@ public class LogDaoMySql  implements ILogDao
 			}
 			
 			String sql="insert into t_action_log(user_agent,user_id,phone_num,device_os,device_os_version,client_os,imei,imsi,client_version,client_type,user_type,channel_id,session_id,wx_openid,qq_openid,wb_openid,request_time,response_time,server_cost_time,action_type,request_success,status_code,data_id,day_time)"
-					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			Connection conn=MySqlHandler.getConnection();
 			int i=qr.update(conn, sql,headMessage.getUserAgent(),headMessage.getUserId(),headMessage.getPhoneNum(),headMessage.getDeviceOS(),headMessage.getDeviceVersion(),headMessage.getClientOS(),headMessage.getImei(),headMessage.getImsi(),headMessage.getClientVersion(),headMessage.getClientType()
@@ -86,7 +86,7 @@ public class LogDaoMySql  implements ILogDao
 			else
 			{
 				sql="insert into t_login_record(user_agent,user_id,phone_num,device_os,device_os_version,client_os,imei,imsi,client_version,client_type,user_type,channel_id,wx_openid,qq_openid,wb_openid,last_login_time,login_times) "
-						+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				flag=qr.update(conn, sql,headMessage.getUserAgent(),headMessage.getUserId(),headMessage.getPhoneNum(),headMessage.getDeviceOS(),headMessage.getDeviceVersion(),headMessage.getClientOS(),headMessage.getImei(),headMessage.getImsi(),headMessage.getClientVersion(),headMessage.getClientType()
 						,headMessage.getUserType(),headMessage.getChannelId(),headMessage.getWxOpenId(),headMessage.getQqOpenId(),headMessage.getWbOpenId(), 
 						lastLoginTime,1)>0?true:false;
