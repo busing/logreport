@@ -40,4 +40,9 @@ public class DateUtil
 		return new SimpleDateFormat("yyyyMMdd").format(new Date());
 	}
 	
+	public static String getCurrentDayStr(Calendar cal)
+	{
+		return new SimpleDateFormat("yyyyMMdd").format(cal.getTime());
+	}
+	
 }
